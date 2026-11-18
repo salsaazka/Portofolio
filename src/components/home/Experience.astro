@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+const jobs = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+// the "plot twist" card sits between the last dev role and the first QA role
+const twistAt = jobs.findIndex((j) => j.data.track === 'qa');
+---
+
+<section class="hsec experience" id="experience" data-spec="experience" aria-labelledby="exp-h">
+  <div class="h-view">
+    <div class="wrap">
+      <p class="eyebrow">03 / Experience <span class="pass">✓ PASSED</span></p>
+      <h2 class="h2" id="exp-h" data-split>From building apps to <em class="serif">breaking them.</em></h2>
+    </div>
+    <div class="h-track exp-track">
+      <div class="rail"><i></i></div>
+      {jobs.map((job, i) => (
+        <>
+          {i === twistAt && (
+            <div class="twist"><b>Plot twist ↺</b><p>Same team, new role — from writing features to finding where they break.</p></div>
+          )}
+          <article class:list={['job', { qa: job.data.track === 'qa', now: job.data.current }]}>
+            <span class="yr">{job.data.year}</span>
+            <div class="job-card">
+              <span class="tag">{job.data.track.toUpperCase()}{job.data.current && ' · NOW'}</span>
+              <h3>{job.data.role}</h3>
+              <p class="co">{job.data.company}</p>
+              <p class="meta">{job.data.period} · {job.data.place}</p>
+            </div>
+          </article>
+        </>
+      ))}
+      <div class="h-end" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>

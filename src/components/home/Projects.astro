@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from '../ProjectCard.astro';
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="hsec projects" id="projects" data-spec="projects" aria-labelledby="proj-h">
+  <div class="h-view">
+    <div class="big-out" aria-hidden="true">PROJECTS — PROJECTS</div>
+    <div class="wrap proj-head">
+      <div>
+        <p class="eyebrow">04 / Selected work <span class="pass">✓ PASSED</span></p>
+        <h2 class="h2" id="proj-h" data-split>Things I’ve <em class="serif" style="color:var(--accent)">tested &amp; built.</em></h2>
+      </div>
+      <p>{String(projects.length).padStart(2, '0')} specs · scroll, or click to inspect</p>
+    </div>
+    <div class="h-track proj-track">
+      {projects.map((p) => <ProjectCard project={p} />)}
+      <a class="pcard all" href="/projects" data-cursor="inspect"><b>View all<br />projects →</b><span>/projects</span></a>
+      <div class="h-end" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>

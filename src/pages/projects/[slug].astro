@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Terminal from '../../components/Terminal.astro';
+import Contact from '../../components/Contact.astro';
+
+export async function getStaticPaths() {
+  const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, next: projects[(i + 1) % projects.length] },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  next: CollectionEntry<'projects'>;
+}
+const { project, next } = Astro.props;
+const p = project.data;
+const num = String(p.order).padStart(2, '0');
+const { Content } = await render(project);
+---
+
+<Base title={p.title} description={p.summary}>
+  <div data-page="project">
+    <article class="pp" data-spec="project">
+      <div class="wrap">
+        <a class="back" href="/projects" data-nav>← All projects</a>
+        <div class="pp-head">
+          <div class="pp-num" data-reveal>{num}</div>
+          <div>
+            <p class="eyebrow">{p.kind} {p.sample && <span class="sample" style="margin-left:6px">SAMPLE CONTENT</span>}</p>
+            <h1 class="pp-title" data-split>{p.title}</h1>
+          </div>
+        </div>
+        <div class="pp-meta">
+          <div data-reveal><span>Role</span><b>{p.role}</b></div>
+          <div data-reveal><span>Team</span><b>{p.team}</b></div>
+          <div data-reveal><span>Year</span><b>{p.year}</b></div>
+          <div data-reveal><span>Tools</span><b>{p.tools.join(', ')}</b></div>
+        </div>
+        <div class="pp-visual" data-reveal><div data-speed="0.9"><Terminal lines={p.terminal} /></div></div>
+        <div class="pp-body" data-reveal-children>
+          <Content />
+        </div>
+      </div>
+      <a class="next" href={`/projects/${next.id}`} data-cursor="inspect">
+        <div class="wrap"><span>Next spec → {String(next.data.order).padStart(2, '0')}</span><b>{next.data.title}</b></div>
+      </a>
+    </article>
+    <Contact />
+  </div>
+</Base>

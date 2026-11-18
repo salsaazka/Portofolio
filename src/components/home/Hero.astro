@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import illustration from '../../assets/salsa-illustration.webp';
+import { SITE } from '../../config';
+
+// Each letter is its own parallax layer: depth = scroll speed, rot = rotation at the end of the scroll
+const letters = [
+  { ch: 'P', x: 190, y: 415, size: 390, anchor: 'start', t: 'rotate(-3 300 280)', depth: 0.35, rot: -6 },
+  { ch: 'O', x: 500, y: 448, size: 215, depth: 0.8, rot: 14 },
+  { ch: 'R', x: 548, y: 322, size: 300, t: 'rotate(-28 548 215)', depth: 0.55, rot: -12 },
+  { ch: 't', x: 768, y: 218, size: 330, depth: 0.22, rot: 5 },
+  { ch: 'f', x: 958, y: 246, size: 190, t: 'rotate(18 958 176)', depth: 0.95, rot: 22 },
+  { ch: 'o', x: 1024, y: 422, size: 290, depth: 0.45, rot: -8 },
+  { ch: 'L', x: 1188, y: 410, size: 285, t: 'rotate(-6 1188 310)', depth: 0.7, rot: 10 },
+  { ch: 'i', x: 1262, y: 382, size: 310, t: 'rotate(4 1262 272)', depth: 0.3, rot: -14 },
+  { ch: 'o', x: 1338, y: 416, size: 225, depth: 0.62, rot: 18 },
+];
+const font = 'Poppins, Geist, system-ui, sans-serif';
+---
+
+<section class="hero" id="top" data-spec="hero" aria-label="Intro">
+  <div class="hero-inner">
+    <div class="hero-mobile">
+      <p class="tagline">I break things so your users don't.</p>
+      <p class="muted" style="margin:0;font-size:15px">{SITE.role} · {SITE.city}</p>
+      <span class="status"><i></i>open to collaborate</span>
+    </div>
+
+    <div class="hero-stage">
+      <svg viewBox="0 0 1600 940" role="img" aria-label={`Portfolio — QA — ${SITE.name}`}>
+        <g font-family={font} font-weight="800" fill="#111111" letter-spacing="-4">
+          {letters.map((l) => (
+            <g class="L" data-depth={l.depth} data-rot={l.rot}>
+              <text x={l.x} y={l.y} font-size={l.size} text-anchor={l.anchor ?? 'middle'} transform={l.t}>{l.ch}</text>
+            </g>
+          ))}
+        </g>
+        <g class="L" data-depth="1.1" data-rot="-4"><text x="1080" y="136" font-family={font} font-weight="800" font-size="118" letter-spacing="-3" fill="#8E7A5C">QA</text></g>
+        <g class="L" data-depth="1.25" data-rot="0"><text x="200" y="522" font-family={font} font-weight="700" font-size="27" letter-spacing="1" fill="#8E7A5C">{SITE.name.toUpperCase()}</text></g>
+      </svg>
+
+      <div class="badge-spin" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="58" fill="#DFF67E"></circle>
+          <g class="ring">
+            <path id="circ" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" fill="none"></path>
+            <text font-family="Geist Mono, monospace" font-size="9.6" letter-spacing="1.1" fill="#10241A"><textPath href="#circ">BUG HUNTER · SINCE 2024 · QA ENGINEER ·</textPath></text>
+          </g>
+          <g transform="translate(60 60)" fill="none" stroke="#10241A" stroke-width="2.2" stroke-linecap="round">
+            <ellipse rx="9" ry="12" fill="#10241A"></ellipse>
+            <path d="M-9-4h-8M9-4h8M-9 4h-8M9 4h8M-5-11l-4-6M5-11l4-6"></path>
+            <path d="M0-10V12" stroke="#DFF67E" stroke-width="1.6"></path>
+          </g>
+        </svg>
+      </div>
+
+      <Image
+        class="hero-illo"
+        src={illustration}
+        alt={`Illustration of ${SITE.name}`}
+        widths={[420, 640, 900, 1000]}
+        sizes="(max-width: 760px) 84vw, 37vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+
+      <div class="hero-copy left">
+        <p class="tagline">I break things so your users don't.</p>
+        <p class="muted">QA Engineer with a developer's eye — Playwright, API &amp; k6.</p>
+      </div>
+      <div class="hero-copy right">
+        <p class="muted">Currently testing at <b style="color:var(--ink)">{SITE.company}</b>, {SITE.city}.</p>
+        <span class="status"><i></i>open to collaborate</span>
+        <a class="scroll-cue" href="#about" data-nav><span class="track"></span>scroll to run tests</a>
+      </div>
+    </div>
+    <div class="scanline" aria-hidden="true"><span>scanning ui…</span></div>
+    <div class="hero-shade"></div>
+  </div>
+</section>

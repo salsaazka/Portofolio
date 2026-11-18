@@ -1,0 +1,10 @@
+---
+import { NAV, waLink } from '../config';
+import Icon from './Icon.astro';
+---
+
+<div class="menu" id="menu" aria-hidden="true" transition:persist="menu">
+  <button class="menu-close">Close <span aria-hidden="true">×</span></button>
+  {NAV.map((l) => <a href={l.href} data-nav><span>{l.n}</span>{l.label}</a>)}
+  <a href={waLink()} target="_blank" rel="noopener" class="menu-wa"><Icon name="whatsapp" />WhatsApp ↗</a>
+</div>

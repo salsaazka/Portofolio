@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Contact from '../../components/Contact.astro';
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Projects" description="Selected QA and development work by Salsabila Azka Putri.">
+  <div data-page="projects">
+    <section class="plist edu" data-spec="projects" aria-labelledby="plist-h">
+      <div class="wrap">
+        <a class="back" href="/" data-nav>← Home</a>
+        <div class="plist-head" style="margin-top:28px">
+          <div>
+            <p class="eyebrow">Selected work <span class="pass">✓ PASSED</span></p>
+            <h1 class="h2" id="plist-h" data-split>All <em class="serif">projects.</em></h1>
+          </div>
+          <p data-reveal>Automation suites, load tests, UAT rounds — and the apps I built before I started breaking them.</p>
+        </div>
+        <div class="plist-grid">
+          {projects.map((p) => <div data-reveal><ProjectCard project={p} /></div>)}
+        </div>
+      </div>
+    </section>
+    <Contact />
+  </div>
+</Base>

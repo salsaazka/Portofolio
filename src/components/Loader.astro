@@ -1,0 +1,25 @@
+---
+// First-visit intro. Shown via the `first-visit` class set in Base.astro's head script.
+const specs = ['hero', 'about', 'services', 'experience', 'projects', 'skills', 'education', 'contact'];
+---
+
+<div class="loader" aria-hidden="true">
+  <div class="ld-top"><b>Salsa<i>.</i></b><span>portfolio · build {new Date().getFullYear()}</span><span>QA Engineer — Jakarta</span></div>
+  <div class="ld-bottom">
+    <div class="ld-term">
+      <p class="ld-cmd"><span class="ld-prompt">›</span> <span class="ld-typed"></span><i class="ld-caret"></i></p>
+      <ul class="ld-list">
+        {specs.map((s) => <li><span class="ld-ic"></span>{s}.spec<span class="ld-time"></span></li>)}
+      </ul>
+      <p class="ld-sum"></p>
+    </div>
+    <div class="ld-num"><span>0</span><small>%</small></div>
+  </div>
+  <div class="ld-bar"><i></i></div>
+  <div class="ld-burst">
+    <div>
+      <svg viewBox="0 0 120 120"><circle class="ring" cx="60" cy="60" r="56" fill="#10241A"></circle><path class="tick" d="M37 62l15 15 31-33" fill="none" stroke="#DFF67E" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="72" stroke-dashoffset="72"></path></svg>
+      <p>all specs passed — welcome in</p>
+    </div>
+  </div>
+</div>

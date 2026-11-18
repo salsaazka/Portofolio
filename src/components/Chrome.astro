@@ -1,0 +1,15 @@
+---
+// Page-transition curtain, custom cursor and toast. Persisted across navigations.
+---
+
+<div class="curtain" aria-hidden="true" transition:persist="curtain">
+  <div class="curtain-inner">
+    <div class="curtain-check">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+    </div>
+    <p class="curtain-label">GET / → 200 OK</p>
+  </div>
+</div>
+
+<div class="cursor" aria-hidden="true" transition:persist="cursor"><div class="c-ring"><span>Inspect ↗</span></div><div class="c-dot"></div></div>
+<div class="toast" role="status" aria-live="polite" transition:persist="toast"></div>

@@ -1,0 +1,11 @@
+---
+interface Props {
+  lines: [string, string][];
+}
+const { lines } = Astro.props;
+---
+
+<div class="term">
+  <div class="term-top"><i></i><i></i><i></i></div>
+  {lines.map(([type, text]) => <div class:list={['l', { cmd: type === 'cmd', ok: type === 'ok', sum: type === 'sum' }]}>{text}</div>)}
+</div>

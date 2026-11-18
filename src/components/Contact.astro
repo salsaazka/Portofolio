@@ -1,0 +1,24 @@
+---
+import { SITE, waLink } from '../config';
+import Icon from './Icon.astro';
+---
+
+<footer class="contact" id="contact" data-spec="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <p class="eyebrow">07 / Contact</p>
+    <h2 class="big-cta" id="contact-h">Let’s ship<br /><em class="serif">bug-free.</em></h2>
+    <div class="contact-row">
+      <button class="pill solid" data-copy={SITE.email} data-magnetic>{SITE.email} <span class="mono" style="font-size:12px;opacity:.7">copy</span></button>
+      <a class="pill wa" href={waLink()} target="_blank" rel="noopener" data-magnetic><Icon name="whatsapp" />Chat on WhatsApp</a>
+      <a class="pill" href={SITE.linkedin} target="_blank" rel="noopener" data-magnetic>LinkedIn ↗</a>
+      <span class="pill" style="border-style:dashed">{SITE.location}</span>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="foot">
+      <span>© {new Date().getFullYear()} {SITE.name}</span>
+      <span class="summary">all specs passed ✓</span>
+      <a href="#top" data-nav data-top>Back to top ↑</a>
+    </div>
+  </div>
+</footer>

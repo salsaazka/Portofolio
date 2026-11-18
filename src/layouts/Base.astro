@@ -1,0 +1,68 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import { SITE } from '../config';
+import Loader from '../components/Loader.astro';
+import Chrome from '../components/Chrome.astro';
+import Header from '../components/Header.astro';
+import Menu from '../components/Menu.astro';
+import Runner from '../components/Runner.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = SITE.description } = Astro.props;
+const fullTitle = title ? `${title} — ${SITE.short}` : `${SITE.short} — ${SITE.role}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" transition:animate="none">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#F4F1E8" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Poppins:wght@700;800&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500;1,6..72,700&display=swap"
+    />
+    <!-- Decide before first paint whether the intro loader shows (once per session, ?intro to replay) -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        try {
+          var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var ran = sessionStorage.getItem('ran');
+          if (!reduce && (!ran || /[?&]intro\b/.test(location.search))) d.classList.add('first-visit');
+        } catch (e) {}
+        // failsafe: never leave the loader up if the motion script fails
+        setTimeout(function () { d.classList.remove('first-visit'); }, 9000);
+      })();
+    </script>
+    <ClientRouter />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Loader />
+    <Chrome />
+    <Header />
+    <Menu />
+    <Runner />
+    <main id="main">
+      <slot />
+    </main>
+    <script>
+      import '../scripts/motion';
+    </script>
+  </body>
+</html>

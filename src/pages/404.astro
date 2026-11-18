@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Not found">
+  <div data-page="404">
+    <section class="nf" data-spec="404">
+      <div class="wrap">
+        <p class="eyebrow">1 failed</p>
+        <div class="nf-code" data-reveal>404</div>
+        <div class="term" data-reveal>
+          <div class="term-top"><i></i><i></i><i></i></div>
+          <div class="l cmd">npx playwright test navigation.spec.ts</div>
+          <div class="l fail">page loads at {Astro.url.pathname}</div>
+          <div class="l">&nbsp;&nbsp;Expected: page</div>
+          <div class="l">&nbsp;&nbsp;Received: undefined</div>
+          <div class="l sum">Tip: this one isn't a flaky test — the page really isn't here.</div>
+        </div>
+        <div class="nf-actions">
+          <a class="btn" href="/" data-magnetic>Back to home</a>
+          <a class="pill" href="/projects" data-magnetic>See projects</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

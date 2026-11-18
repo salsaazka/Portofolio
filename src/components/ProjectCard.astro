@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Terminal from './Terminal.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const p = project.data;
+const num = String(p.order).padStart(2, '0');
+---
+
+<a class="pcard" href={`/projects/${project.id}`} data-cursor="inspect">
+  <div class="pcard-top">
+    <span class="pcard-num">{num}</span>
+    <span>{p.kind} · {p.year} {p.sample && <>&nbsp;<span class="sample">SAMPLE</span></>}</span>
+  </div>
+  <Terminal lines={p.terminal} />
+  <h3>{p.title}</h3>
+  <p>{p.summary}</p>
+  <div class="chips">{p.tools.map((t) => <span class="chip">{t}</span>)}</div>
+</a>

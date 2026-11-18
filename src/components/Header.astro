@@ -1,0 +1,18 @@
+---
+import { NAV, SITE, waLink } from '../config';
+import Icon from './Icon.astro';
+const links = NAV.filter((l) => l.label !== 'Contact');
+---
+
+<header class="site-header" transition:persist="header">
+  <div class="bar">
+    <a class="logo" href="/" data-nav>Salsa<b>.</b></a>
+    <nav class="nav" aria-label="Main">
+      {links.map((l) => <a class="link" href={l.href} data-nav>{l.label}</a>)}
+      <a class="icon-btn" href={SITE.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+      <a class="icon-btn" href={waLink()} target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><Icon name="whatsapp" /></a>
+      <a class="btn" href="/#contact" data-nav data-magnetic>Say hello <Icon name="arrow" size={16} /></a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="menu">Menu <span aria-hidden="true">+</span></button>
+    </nav>
+  </div>
+</header>
