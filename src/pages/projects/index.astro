@@ -16,7 +16,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
             <p class="eyebrow">Selected work <span class="pass">✓ PASSED</span></p>
             <h1 class="h2" id="plist-h" data-split>All <em class="serif">projects.</em></h1>
           </div>
-          <p data-reveal>Automation suites, load tests, UAT rounds — and the apps I built before I started breaking them.</p>
+          <p data-reveal>Manual and API testing, performance checks, mobile automation — and the backends I built before I started breaking things.</p>
         </div>
         <div class="plist-grid">
           {projects.map((p) => <div data-reveal><ProjectCard project={p} /></div>)}
