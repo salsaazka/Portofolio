@@ -8,13 +8,13 @@ export const SITE = {
   location: 'Jakarta Metropolitan Area',
   company: 'Treetan Nusantara Network',
   email: 'salsabilaazkaputri@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/salsabilaazka-putri-499496246',
+  linkedin: 'https://www.linkedin.com/in/salsabila-azka-putri-499496246/',
   description:
-    'Salsabila Azka Putri — QA Engineer in Jakarta. Test automation with Playwright, API and performance testing with k6.',
+    'Salsabila Azka Putri — QA Engineer in Jakarta. Manual and API testing, performance testing with k6, and mobile testing with Appium.',
 };
 
 export const WHATSAPP = {
-  number: '62XXXXXXXXXXX', // TODO: real WhatsApp number, format 62… (no +, no leading 0)
+  number: '62881024778172', // format 62… (no +, no leading 0)
   message: "Hi Salsa! I just saw your portfolio and would love to chat.",
 };
 

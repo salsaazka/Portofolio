@@ -30,6 +30,8 @@ Shiratha is Treetan's consumer brand for Umrah and halal travel. Travellers comp
 
 ![Shiratha package list and app promotion](../../assets/projects/shiratha-packages.jpeg)
 
+![Shiratha app home screen](../../assets/projects/shiratha-app-home.jpg)
+
 ## Outcome
 
 Part of my current work as QA Tester at Treetan.
